@@ -20,3 +20,21 @@ def pregunta_10():
 
 
     """
+
+    import csv
+    # Inicializar una lista para almacenar los resultados
+    resultados = []
+
+    # Leer el archivo CSV
+    with open("./files/input/data.csv") as csvfile:
+        reader = csv.reader(csvfile, delimiter='\t')
+        for row in reader:
+            letra = row[0]
+            columna_4 = row[3]
+            columna_5 = row[4]
+            cantidad_columna_4 = len(columna_4.split(','))
+            cantidad_columna_5 = len(columna_5.split(','))
+            resultados.append((letra, cantidad_columna_4, cantidad_columna_5))
+
+    return resultados
+pregunta_10()

@@ -25,3 +25,28 @@ def pregunta_07():
      (9, ['A', 'B', 'E', 'A', 'A', 'C'])]
 
     """
+
+    import csv
+    # Inicializar un diccionario para almacenar las letras asociadas a cada valor de la columna 2
+    asociaciones = {}
+
+    # Leer el archivo CSV
+    with open("./files/input/data.csv") as csvfile:
+        reader = csv.reader(csvfile, delimiter='\t')
+        for row in reader:
+            letra = row[0]
+            valor = int(row[1])
+            if valor in asociaciones:
+                asociaciones[valor].append(letra)
+            else:
+                asociaciones[valor] = [letra]
+
+    # Construir la lista de resultados
+    resultado = []
+    for valor in sorted(asociaciones.keys()):
+        resultado.append((valor, asociaciones[valor]))
+
+    return resultado
+
+# Llamar a la función y mostrar el resultado
+pregunta_07()

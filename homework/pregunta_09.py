@@ -24,3 +24,26 @@ def pregunta_09():
      'jjj': 18}}
 
     """
+
+    import csv
+    # Inicializar un diccionario para almacenar la cantidad de registros por clave
+    conteos = {}
+
+    # Leer el archivo CSV
+    with open("./files/input/data.csv") as csvfile:
+        reader = csv.reader(csvfile, delimiter='\t')
+        for row in reader:
+            # Obtener la columna 5
+            columna_5 = row[4]
+            # Dividir la columna 5 en pares clave:valor
+            pares = columna_5.split(',')
+            for par in pares:
+                clave, valor = par.split(':')
+                if clave in conteos:
+                    conteos[clave] += 1
+                else:
+                    conteos[clave] = 1
+
+    return conteos
+
+pregunta_09()

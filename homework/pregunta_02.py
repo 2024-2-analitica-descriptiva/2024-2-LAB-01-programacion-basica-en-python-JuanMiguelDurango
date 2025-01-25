@@ -15,3 +15,26 @@ def pregunta_02():
     [('A', 8), ('B', 7), ('C', 5), ('D', 6), ('E', 14)]
 
     """
+# Ruta del archivo
+    file_path = './files/input/data.csv'
+
+    # Contar la cantidad de registros por cada letra en la primera columna
+    from collections import Counter
+
+# Inicializar un contador para las letras de la primera columna
+    counter = Counter()
+
+# Leer el archivo línea por línea
+    with open(file_path, 'r') as file:
+        for line in file:
+            columns = line.strip().split("\t")  # Dividir por tabulaciones
+            if columns:  # Asegurarse de que la línea no esté vacía
+                letra = columns[0]  # Obtener la letra de la primera columna
+                counter[letra] += 1  # Contar la letra
+
+# Convertir el contador a una lista de tuplas, ordenada alfabéticamente
+    resultado = sorted(counter.items())
+
+    return resultado
+
+pregunta_02()

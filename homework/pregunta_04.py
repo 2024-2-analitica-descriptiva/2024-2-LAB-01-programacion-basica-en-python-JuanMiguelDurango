@@ -26,3 +26,31 @@ def pregunta_04():
      ('12', 3)]
 
     """
+
+    # Ruta del archivo
+    file_path = './files/input/data.csv'
+
+    # Contar la cantidad de registros por cada letra en la primera columna
+    from collections import Counter
+
+    # Inicializar un contador para los meses
+    mes_counter = Counter()
+
+    # Leer el archivo línea por línea
+    with open(file_path, 'r') as file:
+        for line in file:
+            columns = line.strip().split("\t")  # Dividir por tabulaciones
+            if len(columns) > 2:  # Asegurarse de que la línea tenga al menos tres columnas
+                fecha = columns[2]  # Obtener la fecha de la tercera columna
+                try:
+                    mes = fecha.split("-")[1]  # Extraer el mes de la fecha (segundo elemento)
+                    mes_counter[mes] += 1  # Contar el mes
+                except IndexError:
+                    pass  # Ignorar filas con fechas mal formateadas
+
+    # Convertir el contador a una lista de tuplas, ordenada alfabéticamente por el mes
+    resultado_meses = sorted(mes_counter.items())
+
+    return resultado_meses
+
+pregunta_04()

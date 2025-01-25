@@ -26,3 +26,34 @@ def pregunta_06():
      ('jjj', 5, 17)]
 
     """
+    import csv
+ #Inicializar un diccionario para almacenar los valores mínimos y máximos
+    valores = {}
+
+    # Leer el archivo CSV
+    with open("./files/input/data.csv") as csvfile:
+        reader = csv.reader(csvfile, delimiter='\t')
+        for row in reader:
+            # Obtener la columna 5
+            columna_5 = row[4]
+            # Dividir la columna 5 en pares clave:valor
+            pares = columna_5.split(',')
+            for par in pares:
+                clave, valor = par.split(':')
+                valor = int(valor)
+                if clave in valores:
+                    valores[clave].append(valor)
+                else:
+                    valores[clave] = [valor]
+
+    # Construir la lista de resultados
+    resultado = []
+    for clave in sorted(valores.keys()):
+        min_valor = min(valores[clave])
+        max_valor = max(valores[clave])
+        resultado.append((clave, min_valor, max_valor))
+
+    return resultado
+
+# Llamar a la función y mostrar el resultado
+pregunta_06()
